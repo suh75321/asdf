@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>등록 페이지</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<style>
+    .mytitle {
+        height: 200px;
+        color: white;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+
+        background-image: url('https://previews.123rf.com/images/maxborovkov/maxborovkov1703/maxborovkov170300174/74747035-%EB%8B%A4%EC%B1%84%EB%A1%9C%EC%9A%B4-%EC%83%89%EC%A2%85%EC%9D%B4%EC%99%80-%EC%A2%85%EC%9D%B4-%EB%B0%B0%EB%84%88%EB%A5%BC-%ED%99%98%EC%98%81%ED%95%A9%EB%8B%88%EB%8B%A4-%EB%B2%A1%ED%84%B0-%EC%9D%BC%EB%9F%AC%EC%8A%A4%ED%8A%B8-%EB%A0%88%EC%9D%B4-%EC%85%98.jpg');
+        background-position: center;
+        background-size: cover;
+    }
+
+    .bigbox {
+        width: 1200px;
+        margin: 20px auto 0px auto;
+        padding: 20px;
+    }
+
+    .mypostingbox {
+        margin-bottom: 20px;
+    }
+</style>
+<script type="module">
+    // Firebase SDK 라이브러리 가져오기
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyDzEZ_ReCXEh_90-ptWchHb9SJs8RWEvhk",
+        authDomain: "spartaproject-1ecec.firebaseapp.com",
+        projectId: "spartaproject-1ecec",
+        storageBucket: "spartaproject-1ecec.appspot.com",
+        messagingSenderId: "313832348507",
+        appId: "1:313832348507:web:7ec5e6cc415a897c8f187e",
+        measurementId: "G-E7DHMQWS2X"
+    };
+
+
+    // Firebase 인스턴스 초기화
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    
+
+    
+        $("#postingbtn").click(async function () {
+           
+            let name = $("#name").val();
+            let mbti = $("#mbti").val();
+            let advantage = $("#advantage").val();
+            let introduction = $("#introduction").val();
+            let goal = $("#goal").val();
+            let promise = $("#promise").val();
+            let git = $("#git").val();
+            let pw = $("#pw").val();
+
+            let doc = {
+                name: name,
+                mbti: mbti,
+                advantage: advantage,
+                introduction: introduction,
+                goal: goal,
+                promise: promise,
+                git: git,
+                pw: pw
+            };
+
+            await addDoc(collection(db, "database"), doc);
+
+            
+            alert("등록완료");
+        });
+    
+
+</script>
+
+
+<body>
+    <div class="mytitle">
+
+
+    </div>
+    <div class="bigbox">
+        <div class="mypostingbox" id="postingbox">
+            <div class="row g-2">
+                <div class="col-md">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="name" placeholder="이름" value="">
+                        <label for="floatingInputGrid">이름</label>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="row g-2">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="mbti" placeholder="MBTI"
+                                    value="">
+                                <label for="floatingInputGrid">MBTI</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="advantage" placeholder="장점">
+            <label for="floatingInput">장점</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="introduction" placeholder="소개">
+            <label for="floatingInput">소개</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="goal" placeholder="목표">
+            <label for="floatingInput">목표</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="promise" placeholder="약속">
+            <label for="floatingInput">약속</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="git" placeholder="Git">
+            <label for="floatingInput">Git</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="pw" placeholder="PW">
+            <label for="floatingInput">PW</label>
+        </div>
+        <div class="mybtn">
+            <button id="postingbtn" type="button" class="btn btn-primary">등록</button>
+            <button type="button" class="btn btn-outline-primary">닫기</button>
+        </div>
+    </div>
+    
